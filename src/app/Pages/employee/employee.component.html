@@ -1,0 +1,170 @@
+
+<div class="container">
+    <p-growl [(value)]="msgs" styleClass="registerGrowl"></p-growl>
+    <p-fieldset>
+        <p-header *ngIf="!editable" translate>Add New Employee</p-header>
+        <p-header *ngIf="editable" translate>Edit Employee</p-header>          
+        <form  [formGroup]="addForm" (ngSubmit)="submitForm()" #formDir="ngForm">
+            <div class="col-md-12">
+                <mat-accordion class="example-headers-align">
+                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-icon>account_circle</mat-icon>
+                                <div class="title-panel-header">
+                                    {{'Personal data'|translate}}
+                                </div>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                    
+                        <div class="row">
+                                <div class="form-group col-md-6">
+                                        <label class="control-label col-md-12 normal">{{'Employee Code'|translate}} <span class="required">*</span></label>
+                                        <div class="col-md-6">
+                                            <input matInput class="form-control" formControlName="empCode" id="empCode" 
+                                                type="text"  name="empCode"  placeholder="{{'Employee Code'|translate}}" required>
+                                        </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label class=" control-label col-md-12 normal">{{'Employee Name'|translate}} <span class="required">*</span></label>
+                                        <div class="col-md-6">
+                                            <input type="text" formControlName="empName" class="form-control" id="empName" 
+                                                name="empName"  placeholder="{{'Employee Name'|translate}}" required>
+                                        </div>
+                                </div>
+                                            
+                                <div class="form-group col-md-6">
+                                  <label class=" control-label col-md-12 normal" translate>{{'Employee Email'|translate}} <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                    <input class="form-control" formControlName="email" id="email" type="email"  
+                                                name="email"  placeholder="{{'Employee Email'|translate}}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                  <label class=" control-label col-md-12 normal">{{'Mobile'|translate}} <span class="required">*</span></label>
+                                        <div class="col-md-6">
+                                            <input class="form-control" formControlName="mobile" id="mobile" type="number"  
+                                            name="mobile"  placeholder="{{'Mobile'|translate}}" required>
+                                        </div>
+                                    </div>
+                                
+                        </div>                        
+                    
+                        <mat-action-row>
+                            <button mat-button type="button" color="primary" (click)="nextStep()" >
+                                {{'Next'|translate}}
+                            </button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-icon>attach_money</mat-icon>
+                                <div class="title-panel-header">
+                                    {{'Financial Information'|translate}}
+                                </div>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        
+                        <div class="row">                                 
+                            <div class="form-group col-md-6">
+                              <label class="control-label col-md-12 normal" translate>{{'Salary'|translate}} <span class="required">*</span></label>
+                                <div class="col-md-6">
+                                <input class="form-control" formControlName="salary" id="salary" type="number" 
+                                name="salary"  placeholder="{{'Salary'|translate}}" required>
+                                </div>
+                                </div>
+                            <div class="form-group col-md-6">
+                              <label class=" control-label col-md-12 normal" translate>{{'Hour Cost'|translate}}<span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="hourCost" id="hourCost" type="number"  
+                                        name="hourCost"  placeholder="{{'Hour Cost'|translate}}" required>
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                              <label class=" control-label col-md-12 normal" >{{'Payment Type'|translate}} <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="payT" formControlName="paymentTypeId" required>
+                                        <option [value]="null" translate>Select Payment Type</option>
+                                            <option *ngFor="let payT of Pays" [value]="payT.id">{{payT.paymentTypeName}}</option>
+                                        </select>
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                              <label class=" control-label col-md-12 normal" >{{'Bank Account No'|translate}} <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="bankAccountNo" id="BankAccountNo" 
+                                        type="number"  name="BankAccountNo"  placeholder="{{'Bank Account No'|translate}}" required>
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                              <label class=" control-label col-md-12 normal">{{'Rate'|translate}} <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="rate" id="Rate" type="number"  name="Rate"  
+                                        placeholder="{{'Rate'|translate}}" required>
+                                    </div>
+                            </div>
+
+                            <!-- <div class="form-group col-md-6">
+                                    <label class=" control-label col-md-12 normal" translate>OverHead Cost <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="overHeadAmount" id="OverHeadAmount" type="number"  
+                                        name="Rate"  placeholder="{{'OverHead Cost'|translate}}" required>
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                    <label class=" control-label col-md-12 normal" translate>Allowance <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="allowanceAmount" type="number"
+                                            name="allowance"  placeholder="{{'Allowance Amount'|translate}}" required>
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                    <label class=" control-label col-md-12 normal" translate>OverTime Amount <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="overTimeAmount" type="number"  
+                                        name="allowance"  placeholder="{{'OverTime Amount'|translate}}" required>
+                                    </div>
+                            </div> -->
+
+                            <div class="form-group col-md-6">
+                              <label class=" control-label col-md-12 normal" >{{'Salary Activate Date'|translate}} <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="salaryActivatDate"  type="date"   
+                                            placeholder="{{'Salary Activate Date'|translate}}" required>
+                                    </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label class=" control-label col-md-12 normal" >{{'Hiring Date'|translate}} <span class="required">*</span></label>
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="hiringDate"  type="date"   
+                                            placeholder="{{'Hiring Date'|translate}}" required>
+                                    </div>
+                            </div>
+                        </div>
+
+                        <mat-action-row>
+                            <button mat-button type="button" color="warn" (click)="prevStep()">{{'Previous'|translate}}</button>
+                            <!-- <button mat-button type="button" color="primary" (click)="nextStep()">{{'End'|translate}}</button> -->
+                        </mat-action-row>
+                    </mat-expansion-panel>
+                    
+                </mat-accordion>
+            </div>    
+            
+            <div class="col-md-12 margin-top-15 text-right">
+                    <button class="center btn btn-primary" translate>Save Employee</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="center btn btn-primary" translate routerLink="/listemployee" routerLinkActive="active">Cancel</button>
+            </div>   
+        </form>
+    </p-fieldset>    
+</div>
+    

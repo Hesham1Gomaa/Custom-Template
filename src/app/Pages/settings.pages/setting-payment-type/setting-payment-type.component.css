@@ -1,0 +1,5 @@
+.table th, .table td, .table thead th {
+  padding: 0rem;
+  vertical-align: middle;
+  text-align: center;
+}

@@ -1,0 +1,15 @@
+.table th, .table td, .table thead th {
+  padding: 0rem;
+  vertical-align: middle;
+  text-align: center;
+}
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 10px;
+}

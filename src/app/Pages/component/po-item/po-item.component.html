@@ -1,0 +1,38 @@
+<div class="table-responsive">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Item Desc</th>
+                <th>Quentity</th>
+                <th>Unit Price</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form  [formGroup]="addPOItem" (ngSubmit)="ADdPOItem()" #formDir="ngForm">
+                <div class="form-group">
+                    <tr>
+                         <td>
+                             <div>
+                                <select class="form-control" formControlName="DepartmentId" id="Status" required>
+                                    <option value="true">Issued</option>
+                                    <option value="false">Non Issued</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                           <input class="form-control" formControlName="Qty" id="Qty" type="number"  name="Potype"  placeholder="Qty.." required>
+                        </td>  
+                        <td>
+                            <input class="form-control" formControlName="UnitPrice" id="UnitPrice" type="number"  name="Potype"  placeholder="UnitPrice.." required>
+                         </td> 
+                         <td>
+                            <span  formControlName="TotalAmount"></span>
+                            <button>ADD</button>
+                          </td>                          
+                    </tr>
+               </div>
+           </form>
+        </tbody>
+    </table>
+</div>

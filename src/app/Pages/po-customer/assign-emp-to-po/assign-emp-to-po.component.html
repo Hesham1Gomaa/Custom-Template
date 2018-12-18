@@ -1,0 +1,105 @@
+<!-- {{addPOForm.value|json}}   -->
+<div class="container">
+  <p-growl [(value)]="msgs" styleClass="registerGrowl"></p-growl>
+  <p-fieldset legend="{{'Assign Employee To PO'|translate}}">
+      <div class="row">
+          <div class="col-md-12">
+              <form [formGroup]="addPOForm" (ngSubmit)="AssinEmp_PO()" #formDir="ngForm">
+                  <div class="row form-group">
+                      <div class="form-group col-md-6">
+                          <label class="control-label col-md-12 normal" for="poId" translate>PO Customer No</label>
+                          <div class="col-md-6">
+                              <select class="form-control" (change)="selectPO($event.target.value)" formControlName="poid" required>
+                                  <option [value]="null">{{'Select PO'|translate}}</option>
+                                  <option *ngFor="let po of AllPOs" [value]="po.id"><span>{{po.ponoCreation}}</span></option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row form-group" *ngIf="selctionPO">
+                      <dl class="col-md-12">
+                          <div class="row col-md-12">
+                              <dt class="col-md-3" translate>Customer Name</dt>
+                              <dd class="col-md-3" translate>{{customer == undefined ? '--' : customer}}</dd>
+
+                              <dt class="col-md-3" translate>P.O Creation Date</dt>
+                              <dd class="col-md-3" translate>{{CreationDt == undefined ? '--' : CreationDt | date:'dd-MM-yyyy'}}</dd>
+
+                              <dt class="col-md-3" translate>Delivery Time</dt>
+                              <dd class="col-md-3" translate>{{deliveryDT == undefined ? '--' : deliveryDT | date:'dd-MM-yyyy'}}</dd>
+
+                              <dt class="col-md-3" translate>P.O Approval Date</dt>
+                              <dd class="col-md-3" translate>{{poapprovalDt == undefined ? '--' : poapprovalDt | date:'dd-MM-yyyy'}}</dd>
+                          </div>
+                      </dl>
+                      <div class="col-md-12">
+                          <p-fieldset legend="{{'Assign Employee'|translate}}">
+                              <div class="row">
+                                  <div class="form-group col-md-4">
+                                    <label class="control-label col-md-12 normal" for="cusName" translate>Select Employee </label>
+                                    <div class="col-md-10">
+                                      <select class="form-control" (change)="addEmpToPo($event.target.value)" required>
+                                        <option translate>Select Employee</option>
+                                        <option *ngFor="let emp of allEmps" [value]="emp.id"><span>{{emp.empName}}</span></option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group col-md-4">
+                                    <label class="control-label col-md-12 normal" for="cusName" translate>P.O Item Description</label>
+                                    <div class="col-md-10">
+                                      <select class="form-control" (change)="selectPOitemDesc($event.target.selectedIndex)" required>
+                                        <option translate>Select PO Description</option>
+                                        <option *ngFor="let podesc of poitemsDesc" [value]="podesc.id"><span>{{podesc.descriptions}}</span></option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group col-md-4" *ngIf="selctionPOdesc">
+                                    <label class="control-label col-md-12 normal" for="cusName" translate>PO Item Quntity</label>
+                                    <div class="col-md-10">
+                                      {{POITemDEsc}}
+                                    </div>
+                                  </div>
+                                  <div class="col-md-12 text-right" *ngIf="selctionPOdesc">
+                                    <button type="button" (click)="ADDEmpPO()" class="btn btn-primary" translate>Add</button>
+                                  </div>
+                              </div>
+                              <div class="row margin-top-15">
+                                <div *ngIf="selctionEmp" class="table-responsive">
+                                  <div class="col-md-10 offset-md-1">
+                                      <p-table [value]="assignedEmpPO" [responsive]="true">
+                                          <ng-template pTemplate="header" let-columns>
+                                              <tr>
+                                                  <th translate>{{'Employee Name'|translate}}</th>
+                                                  <th translate>Employee Email</th>
+                                                  <th translate>Action</th>
+                                              </tr>
+                                          </ng-template>
+                                          <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
+                                              <tr>
+                                                  <td>
+                                                      {{rowData.empName}}
+                                                  </td>
+                                                  <td>
+                                                      {{rowData.email}}
+                                                  </td>
+                                                  <td>
+                                                      <button type="button" (click)="DeleteEmpPO(i)" class="btn btn-danger">Delete</button> 
+                                                  </td>
+                                              </tr>
+                                          </ng-template>
+                                      </p-table>
+                                  </div>
+                                </div>
+                              </div>
+                          </p-fieldset>
+                      </div>
+                      <div *ngIf="selctionEmp" class="col-md-12 text-right margin-top-15">
+                        <button class="center btn btn-primary" translate>Assign Employee</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </p-fieldset>
+  <div>

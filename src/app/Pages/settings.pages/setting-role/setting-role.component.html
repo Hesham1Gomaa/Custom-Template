@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <p-fieldset legend="{{'All Roles'|translate}}">
+      <p-growl [(value)]="msgs"></p-growl>
+      <div class="row">
+        <div class="mat-elevation-z8 col-md-12 " style="margin-top: -20px;">
+          <div class="example-header" style="margin-left: 84%;">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{'Search'|translate}}">
+          </div>
+
+          <table mat-table [dataSource]="dataSource" class="table table-striped col-md-12">
+
+
+            <ng-container matColumnDef="roleName">
+              <th *matHeaderCellDef translate>Role Name </th>
+              <td *matCellDef="let element"> {{element.roleName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th *matHeaderCellDef translate>Action</th>
+              <td *matCellDef="let role">
+
+                <button pButton
+                        icon="fa fa-remove"
+                        class="ui-button-danger" (click)="Delete(role)" style="margin: 2px;"></button>
+                <button pButton
+                        icon="fa fa-edit"
+                        class="ui-button-danger" (click)="Edit(role)" style="margin: 2px;"></button>
+
+              </td>
+
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" translate>Edit</tr>
+            <!--<div class="col-md-4" *ngIf="dataSource.length==0">
+            <span style="color:green">No Records Found!</span>
+          </div>-->
+          </table>
+          <div class="col-md-4" *ngIf="dataSource?.data.length===0">
+            <span style="color:green">No Records Found!</span>
+          </div>
+          <mat-paginator [pageSizeOptions]="[3, 5, 7]" showFirstLastButtons></mat-paginator>
+          <div class="col-sm-12">
+
+            <button class="btn btn-primary pull-right" [disabled]="checkEdit" (click)="addPanel()" translate>Add Role</button>
+          </div>
+        </div>
+      </div>
+    </p-fieldset>
+  </div>
+  <div class="row" *ngIf="checkAdd || checkEdit" style="margin-top:30px">
+    <p-fieldset [legend]="title|translate">
+      <div class="row col-md-12">
+        <form [formGroup]="addRoleForm" #formDir="ngForm">
+          <div class="row col-md-12">
+            <div class="form-group col-md-12">
+              <label class="control-label" for="PonoCreation" translate>Role Name</label>
+              <div class="col-md-12">
+                <input id="PonoCreation" type="text" class="form-control" formControlName="roleName" placeholder="{{'Role Name'|translate}}" [ngClass]="{ 'is-invalid': submitted && f.roleName.errors }" />
+                <div *ngIf="submitted && f.roleName.errors" class="invalid-feedback">
+                  <div *ngIf="f.roleName.errors.required" translate>Role Name is required</div>
+                </div>
+              </div>
+            </div>
+           
+              <div class="col-md-10">
+                <button class="center btn btn-primary col-md-3" style="margin:5px;" translate (click)="AddRole()">Save</button>
+                <button class="center btn btn-primary col-md-3" translate (click)="Cancel()">Cancel</button>
+              </div>
+          
+          </div>
+        </form>
+      </div>
+    </p-fieldset>
+  </div>
+
+
+</div>
+
+
+
+

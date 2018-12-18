@@ -1,0 +1,86 @@
+<!-- {{addCustomerForm.value|json}}  -->
+<div class="container">
+  <p-fieldset legend="{{'Add Contact Role'|translate}}">
+    <p-growl [(value)]="msgs"></p-growl>
+
+    <div class="col-md-10 offset-md-1 margin-top-15">
+      <p-table [value]="allContactsRole" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="caption">
+          <div class="col-md-12 text-right">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="20" placeholder="Filter...." (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th translate>Customer Role</th>
+            <th translate>ShortCut Role</th>
+            <th translate>Action</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+          <tr>
+            <td>
+              {{rowData.CustomerRole}}
+            </td>
+            <td>
+              {{rowData.ShortCutRole}}
+            </td>
+            <td>
+              <button pButton
+                      icon="fa fa-remove"
+                      class="ui-button-danger" (click)="Delete(rowData)"></button>
+              &nbsp;&nbsp;&nbsp;
+              <button pButton
+                      icon="fa fa-edit"
+                      class="ui-button-danger" (click)="editContactRole(rowData)"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <!-- <ng-template pTemplate="summary">
+          There are {{allContactsRole?.length}} Contact Roles
+      </ng-template> -->
+      </p-table>
+    </div>
+    <div class="col-md-10 offset-md-1 margin-top-15 text-right">
+      <button class="btn btn-primary" [disabled]="editMode" (click)="addContactRole()" translate>Add Contact Role</button>
+    </div>
+    <div class="col-md-10 offset-md-1 margin-top-15" *ngIf="isAddEditForm">
+      <p-fieldset>
+        <p-header *ngIf="!editMode">{{'Add Contact Role'|translate}}</p-header>
+        <p-header *ngIf="editMode">{{'Edit Contact Role'|translate}}</p-header>
+        <form [formGroup]="addContactRoleForm" (ngSubmit)="AddNewContactRole()" #formDir="ngForm">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label class="control-label col-md-6 normal" for="PonoCreation" translate>Contact Role</label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" formControlName="CustomerRole" placeholder="{{'Customer Role'|translate}}" [ngClass]="{ 'is-invalid': submitted && f.CustomerRole.errors }" />
+                <div *ngIf="submitted && f.CustomerRole.errors" class="invalid-feedback">
+                  <div *ngIf="f.CustomerRole.errors.required" translate>Customer Role is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="control-label col-md-6 normal" for="PonoCreation" translate>ShortCut Role</label>
+              <div class="col-md-10">
+                <input class="form-control" formControlName="ShortCutRole" placeholder="{{'Customer Name'|translate}}"
+                       [ngClass]="{ 'is-invalid': submitted && f.ShortCutRole.errors }" />
+                <div *ngIf="submitted && f.ShortCutRole.errors" class="invalid-feedback">
+                  <div *ngIf="f.ShortCutRole.errors.required">ShortCut Role is required</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 text-right">
+            <button class="btn btn-primary" translate>Save</button>
+            &nbsp;&nbsp;&nbsp;
+            <button class="center btn btn-primary col-md-1" translate (click)="Cancel()" type="button">Cancel</button>
+          </div>
+        </form>
+      </p-fieldset>
+    </div>
+  </p-fieldset>
+</div>
+
+        
+

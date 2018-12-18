@@ -1,0 +1,83 @@
+<!-- {{addCustomerForm.value|json}}  -->
+<div class="container">
+  <!--<h3 translate>Add Payment Type</h3>
+  <br>-->
+  <p-growl [(value)]="msgs"></p-growl>
+  <div class="row">
+    <p-fieldset legend="{{'Payment Types'|translate}}">
+      <div class="row">
+        <div class="mat-elevation-z8 col-md-12" style="margin-top: -20px;">
+          <div class="example-header" style="margin-left: 84%;">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{'Search'|translate}}">
+          </div>
+          <table mat-table [dataSource]="dataSource" class="table table-striped">
+
+
+            <ng-container matColumnDef="paymentTypeName">
+              <th *matHeaderCellDef>
+                {{'Payment Type Name'|translate}}
+              </th>
+              <td *matCellDef="let element"> {{element.paymentTypeName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th *matHeaderCellDef> {{'Action'|translate}}</th>
+
+              <td *matCellDef="let payment">
+                <button pButton
+                        icon="fa fa-remove"
+                        class="ui-button-danger" (click)="Delete(payment)" style="margin: 2px;"></button>
+                <button pButton
+                        icon="fa fa-edit"
+                        class="ui-button-danger" (click)="Edit(payment)" style="margin: 2px;"></button>
+
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" translate>Edit</tr>
+          </table>
+          <div class="col-md-4" *ngIf="dataSource?.data.length===0">
+            <span style="color:green">No Records Found!</span>
+          </div>
+          <mat-paginator [pageSizeOptions]="[3, 5, 7]" showFirstLastButtons></mat-paginator>
+          <div class="col-sm-12">
+
+            <button class="btn btn-primary pull-right" [disabled]="checkEdit" (click)="addPanel()" translate>Add Type</button>
+          </div>
+
+        </div>
+      </div>
+    </p-fieldset>
+  </div>
+  <div class="row"  style="margin-top:30px" *ngIf="checkAdd ||checkEdit">
+    <p-fieldset [legend]="title|translate">
+      <div class="row col-md-12">
+        <form [formGroup]="addPaymentForm"  #formDir="ngForm">
+          <div class="row col-md-12" >
+            <div class="col-md-12 form-group">
+   
+                <label for="PaymentTypeName" translate>Payment Type</label>
+              <div class="col-md-12">
+                <input id="PaymentTypeName" type="text" class="form-control" formControlName="paymentTypeName" placeholder="{{'Payment Type'|translate}}"
+                       [ngClass]="{ 'is-invalid': submitted && f.paymentTypeName.errors }" />
+                <div *ngIf="submitted && f.paymentTypeName.errors" class="invalid-feedback">
+                  <div *ngIf="f.paymentTypeName.errors.required" translate>Payment Type is required</div>
+                </div>
+              </div>
+
+            </div>
+          
+              <div class="col-md-10">
+                  <button class="center btn btn-primary col-md-3" style="margin:5px;" translate (click)="AddPayment()">Save</button>
+                  <button class="center btn btn-primary col-md-3" translate (click)="Cancel()">Cancel</button>
+              </div>
+           
+          </div>
+        </form>
+      </div>
+
+    </p-fieldset>
+
+  </div>
+
+</div>

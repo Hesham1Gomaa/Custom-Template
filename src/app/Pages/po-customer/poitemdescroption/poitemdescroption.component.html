@@ -1,0 +1,27 @@
+<!-- {{addPOitemForm.value|json}}  -->
+<div class="container">
+  <p-growl [(value)]="msgs" styleClass="registerGrowl"></p-growl>
+  <div class="row">
+      <div class="col-md-12">
+          <p-fieldset legend="{{'Add P.O Item Description'|translate}}">
+              <form [formGroup]="addPOitemForm" (ngSubmit)="AddPItemDesc()" #formDir="ngForm">
+                  <div class="row col-md-12 form-group">
+                      <div class="form-group col-md-6">
+                          <label class="control-label col-md-12 normal" for="PonoCreation" translate>P.O Item Description</label>
+                          <div class="col-md-6">
+                            <input class="form-control" formControlName="Descriptions" id="PonoCreation" type="text"
+                                  placeholder="{{'Description'|translate}}" required>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row margin-top-15 ">
+                      <div class="col-md-12 text-right">
+                         <button class="center btn btn-primary" translate>Add Description</button>
+                      </div>
+                  </div>
+              </form>
+          </p-fieldset>
+      </div>
+  </div>
+</div>
+

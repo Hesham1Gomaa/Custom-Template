@@ -1,0 +1,105 @@
+  <!-- {{assignempcusForm.value|json}}    -->
+ 
+  <div class="container">
+      <p-growl [(value)]="msgs" styleClass="registerGrowl"></p-growl>
+      <p-fieldset>
+          <p-header *ngIf="!editable" >{{'Assign Employee To Customer'|translate}}</p-header>
+          <p-header *ngIf="editable">{{'Edit Assigned Employee To Customer'|translate}}</p-header>          
+          <form  [formGroup]="assignempcusForm" (ngSubmit)="submitForm()" #formDir="ngForm">              
+                <div class="row">
+
+                    <div class="form-group row col-md-4">
+                        <label class=" control-label col-md-12 normal" translate>Employee Name <span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <select class="form-control"  formControlName="empId" required>
+                                <option [value]="null" translate>select Employee Name</option>
+                                <option *ngFor="let emp of emps" [value]="emp.id">{{emp.empName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-4">
+                        <label class=" control-label col-md-12 normal" translate>Customer Name <span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <select class="form-control"  formControlName="customerId" required>
+                                <option [value]="null"translate>select Customer Name</option>
+                                <option *ngFor="let cust of customers" [value]="cust.id">{{cust.customerName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-4">
+                        <label class=" control-label col-md-12 normal" translate>Customer Manager <span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <select class="form-control"  formControlName="manegar"  required>
+                                <option [value]="null"translate>select Manager</option> 
+                                <option *ngFor="let Manag of Mangers" [value]="Manag.id">{{Manag.contactName}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-4">
+                        <label class=" control-label col-md-12 normal" translate>Customer Team Leader <span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <select class="form-control" formControlName="teamLeader" id="custTL" required>
+                                <option [value]="null"translate>select Team Leader</option>
+                            <option *ngFor="let TL of TLs" [value]="TL.id">{{TL.contactName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                          
+
+                    <div class="form-group row col-md-4">
+                      <label class=" control-label col-md-12 normal">{{'From date'|translate}}<span class="required">*</span></label>
+                        <div class="col-md-10">
+                        <input class="form-control" formControlName="fromDt"  type="date" placeholder="{{'From date'|translate}}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-4">
+                      <label class=" control-label col-md-12 normal">{{'To Date'|translate}}<span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <input class="form-control" formControlName="toDt" id="hourCost" type="date" placeholder="{{'To Date'|translate}}" required>
+                        </div>
+                    </div>
+  
+                        
+                    <div class="form-group row col-md-4">
+                      <label class=" control-label col-md-12 normal">{{'OverHead Amount'|translate}}<span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <input class="form-control" formControlName="overHeadAmount" id="OverHeadAmount" type="number"  
+                            name="Rate"  placeholder="{{'OverHead Amount'|translate}}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-4">
+                        <label class=" control-label col-md-12 normal" translate>Allowance <span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <input class="form-control" formControlName="allowanceAmount" type="number"
+                                name="allowance"  placeholder="{{'Allowance Amount'|translate}}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-4">
+                        <label class=" control-label col-md-12 normal">{{'OverTime Amount'|translate}} <span class="required">*</span></label>
+                        <div class="col-md-10">
+                            <input class="form-control" formControlName="overTimeAmount" type="number"  
+                            name="allowance"  placeholder="{{'OverTime Amount'|translate}}" required>
+                        </div>
+                    </div> 
+
+                </div>
+ 
+                <div class="row col-md-12 margin-top-50 text-right">
+                    <div class="col-md-12 text-right">
+                        <button class="center btn btn-primary" translate>Save Employee</button>
+                    </div>
+                </div>
+  
+                        
+          </form>
+      </p-fieldset>
+  
+      </div>
+  
+    

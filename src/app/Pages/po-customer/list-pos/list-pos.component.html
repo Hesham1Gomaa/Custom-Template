@@ -1,0 +1,65 @@
+
+<!-- {{emps|json}} -->
+<div class="container">
+    <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple">>
+   <p style="font-size: 20px; color: white">Loading...</p>
+   </ngx-spinner>
+   <p-fieldset legend="{{'Purchasing Orders'|translate}}">
+      <div class="row" *ngIf="allPOs.length > 0">
+          <div class="col-md-10 offset-md-1 text-center">
+                <p-table [value]="allPOs" [paginator]="true" [rows]="10" >
+                        <ng-template pTemplate="caption">
+                            <div class="col-md-12 text-right">
+                                <input type="text" pInputText size="20" placeholder="Filter...." (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th translate>Po No Creation</th>
+                                <th translate>Customer Name</th>
+                                <th translate>Action</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td>
+                                    {{rowData.ponoCreation}}
+                                </td>
+                                <td>
+                                    {{rowData.customerId}}
+                                </td>
+                                <td>
+                                    <!-- <button pButton
+                                            icon="fa fa-remove"
+                                            class="ui-button-danger" (click)="Delete(rowData)"></button>
+                                    &nbsp;&nbsp;&nbsp; -->
+                                    <button pButton
+                                            icon="fa fa-edit"
+                                            class="ui-button-danger" (click)="editPO(rowData)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            There are {{allPOs?.length}} Purchasing Orders
+                        </ng-template>
+                    </p-table>
+          </div>
+      </div>
+      <div class="row" *ngIf="allPOs.length == 0">
+          <div class="col-md-12 text-center empty-data">
+              <div class="fa fa-search"></div>
+              <div>{{'No Data Found'|translate}}</div>
+          </div>
+      </div>
+      <div class="row margin-top-15">
+          <div class="col-md-10 offset-md-1 text-right">
+              <button class="btn btn-primary" (click)="addNewPO()" translate>Add New PO</button>
+          </div>
+        </div>
+   </p-fieldset>
+
+</div>

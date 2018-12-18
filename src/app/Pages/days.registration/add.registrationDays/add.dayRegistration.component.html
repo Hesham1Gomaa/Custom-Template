@@ -1,0 +1,81 @@
+<div class="container">
+        <p-growl [(value)]="msgs" styleClass="registerGrowl"></p-growl>
+        <p-fieldset legend="{{'Days Registration'|translate}}">
+                <div class="col-md-12">
+                        <form [formGroup]="addForm" (ngSubmit)="ADD_Days()" #formDir="ngForm">
+                                <div class="row">
+                                        <div class="form-group col-md-6">
+                                                <label class="control-label col-md-4 normal" for="empId" translate>Employee Name</label>
+                                                <div class="col-md-6">
+                                                        <select class="form-control" title="--- choose Employee ---"  (change)="selectEmp($event.target.value)"  formControlName="empId" id="departmentId" required>
+                                                        <option *ngFor="let emp of emps" [value]="emp.id" ><span>{{emp.empName}}</span></option>
+                                                        </select>
+                                                </div>
+                                        </div>
+                                </div>
+                                <section *ngIf="customer != undefined && isEmplyeeSelected">
+                                        <div class="row col-md-12 margin-top-15">
+                                                        <dt class="col-md-3" translate>Customer Name</dt>
+                                                        <dd class="col-md-3" translate>{{customer == undefined ? '--' : customer}}</dd>
+
+                                                        <dt class="col-md-3" translate>HTL</dt>
+                                                        <dd class="col-md-3" translate>{{Manger == undefined ? '--' : Manger}}</dd>
+                                        
+                                                        <dt class="col-md-3" translate>Team Leader</dt>
+                                                        <dd class="col-md-3" translate>{{TL == undefined ? '--' : TL}}</dd>
+                                                        
+                                        </div>   
+
+                                        <div class="row margin-top-15">
+                                                <div class="form-group col-md-6">
+                                                                <label class="control-label col-md-4 normal" for="from" translate>From</label>
+                                                                <div class="col-md-6">
+                                                                        <input class="form-control" formControlName="from"  type="date" placeholder="{{'From'|translate}}" required>
+                                                                        
+                                                                </div>
+                                                </div>  
+                                                <div class="form-group col-md-6">
+                                                                <label class="control-label col-md-4 normal" for="to" translate>To</label>
+                                                                <div class="col-md-6">
+                                                                        <input class="form-control" formControlName="to"  type="date" placeholder="{{'To'|translate}}" required>
+                                                                        
+                                                                </div>
+                                                </div>     
+                                                <div class="form-group col-md-6">
+                                                        <label class="control-label col-md-4 normal" for="empDays"translate>Employee Days</label>
+                                                        <div class="col-md-6">
+                                                                <input class="form-control" formControlName="empDays" id="empDays" type="number" name="empDays" placeholder="{{'Employee Days'|translate}}" required>
+                                                        </div>
+                                                </div>      
+                                                <div class="form-group col-md-6">
+                                                        <label class="control-label col-md-4 normal" for="approvedDays" translate>Approved Days</label>
+                                                        <div class="col-md-6">
+                                                                <input class="form-control" formControlName="approvedDays" id="approvedDays" type="number" name="approvedDays" placeholder="{{'Approved Days'|translate}}" required>
+                                                                </div>
+                                                </div>         
+                                                <div class="form-group col-md-6">
+                                                        <label class="control-label col-md-4 normal" for="overTimeDays"translate>Overtime Days</label>
+                                                        <div class="col-md-6">
+                                                                <input class="form-control" formControlName="overTimeDays"  type="number" placeholder="{{'Overtime Days'|translate}}" required>
+                                                                </div>
+                                                </div>                                                    
+                                                <div class="form-group col-md-6">
+                                                        <label class="control-label col-md-6 normal" for="approvedOverTimeDays"translate>Approved Overtime Days</label>
+                                                        <div class="col-md-6">
+                                                        <input class="form-control" formControlName="approvedOverTimeDays" type="number"  placeholder="{{'Approved Overtime Days'|translate}}" required>
+                                                        </div>
+                                                </div>    
+                                        </div>
+                                        <div class="row margin-top-15">
+                                                        <div class="col-md-12 text-right">
+                                                                        <button class="center btn btn-primary"translate>Add Day Registration</button>
+                                                                        &nbsp;&nbsp;
+                                                                        <button type="button" class="center btn btn-primary" translate routerLink="/listDayReg" routerLinkActive="active">Cancel</button>
+                                                                </div>
+                                        </div>
+                                </section>
+                        </form>  
+                </div>
+        </p-fieldset>
+
+<div>

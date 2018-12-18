@@ -1,0 +1,345 @@
+<!-- {{addPOForm.value|json}}   -->
+<div class="container">
+    <p-growl styleClass="registerGrowl" [(value)]="msgs"></p-growl>
+    <ngx-spinner
+        bdColor="rgba(51,51,51,0.8)"
+        size="medium"
+        color="#fff"
+        type="ball-scale-multiple">
+        <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+
+    <p-fieldset>
+        <p-header *ngIf="!PoId">{{'Add New PO'|translate}}</p-header>
+        <p-header *ngIf="PoId">{{'Update PO'|translate}}</p-header>
+        <form  [formGroup]="addPOForm" (ngSubmit)="ADDCusPO()" #formDir="ngForm">
+            <div class="row" >
+                    <div class="form-group col-md-6">
+                        <label class="control-label col-md-4 normal" for="CustomerId" translate>Customer Name</label>
+                        <div class="col-md-6">
+                            <select class="form-control" formControlName="CustomerId" required>
+                                <option value="null" translate>select Customer</option>
+                                <option  *ngFor="let custm of customers" [value]="custm.id">{{custm.customerName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label col-md-4 normal" for="PonoCreation" translate>P.O No Creation</label>
+                        <div class="col-md-6">
+                            <input class="form-control" formControlName="PonoCreation" id="ponoCreation" type="text"  name="PonoCreation"  placeholder="P.O.No Creation.." required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label col-md-4 normal" for="Podescription" translate>P.O Description</label>
+                        <div class="col-md-6">
+                            <input class="form-control" formControlName="Podescription" id="Podescription" type="text"  
+                                    name="Podescription"  placeholder="P.O Description.." required>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label col-md-4 normal" for="StatusId" translate>P.O Status</label>
+                        <div class="col-md-6">
+                            <select class="form-control" (change)="selectIssued($event.target.value)"  formControlName="StatusId"  required>
+                                <option value="null" >select Status</option>
+                                <option  *ngFor="let poSt of PoStatus" [value]="poSt.id">{{poSt.name}}</option>
+                            </select>                       
+                        </div>
+                    </div>
+            </div>
+            <div class="row form-group" *ngIf="statusFlag">
+
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="Potype" translate>P.O Type</label>
+                    <div class="col-md-6">
+                        <input class="form-control" formControlName="Potype" id="Potype" type="text"  name="Potype"  placeholder="P.O Type.." required>                      
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="PocustomerNo" translate>P.O Customer No</label>
+                    <div class="col-md-6">
+                        <input class="form-control" formControlName="PocustomerNo" id="PocustomerNo" type="text"  name="PocustomerNo"  placeholder="P.O Customer No.." required>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="PocreationDate" translate>P.O Creation Date</label>
+                    <div class="col-md-6">
+                        <input class="form-control" formControlName="PocreationDate" id="pocreationDate" type="date"  name="PocreationDate"  placeholder="P.O Creation Date.." required>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="PoapprovalDate" translate>P.O Approval Date</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="PoapprovalDate" id="poapprovalDate" type="date"  name="PoapprovalDate"  placeholder="P.O Creation Date.." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="Prno" translate>PR No</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="Prno" id="Prno" type="number"  name="Prno"  placeholder="P.O Creation Date.." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="PrapprovalDate" translate>Pr Approval Date</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="PrapprovalDate" id="prapprovalDate" type="date"  name="PrapprovalDate"  placeholder="P.O Creation Date.." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="Buyer" translate>Buyer</label>
+                    <div class="col-md-6">
+                        <input class="form-control" formControlName="Buyer" id="Buyer" type="text"  name="Buyer"  placeholder="Buyer.." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="Requester" translate>Requester</label>
+                    <div class="col-md-6">
+                        <input class="form-control" formControlName="Requester" id="Requester" type="text"  name="Requester"  placeholder="Requester.." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="RequesterDept" translate>Requester Dept.</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="RequesterDept" id="RequesterDept" type="text"  name="Requester"  placeholder="Requester Dept.." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="Penalty" translate>Penalty</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="Penalty" id="Penalty" type="text"  name="Penalty"  placeholder="Penalty..." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="SupplierName" translate>Supplier Name</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="SupplierName" id="SupplierName" type="text"  name="SupplierName"  placeholder="Supplier Name..." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="SupplierAdderss" translate>Supplier Adderss</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="SupplierAdderss" id="SupplierAdderss" type="text"  name="SupplierAdderss"  placeholder="Supplier Adderss..." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="Currency" translate>Currency</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="Currency" id="Currency" type="text"  name="Currency"  placeholder="Currency ..." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="PaymentTerm" translate>Payment Term</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="PaymentTerm" id="PaymentTerm" type="text"  name="PaymentTerm"  placeholder="Payment Term ..." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="DeliveryTerm" translate>Delivery Term</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="DeliveryTerm" id="DeliveryTerm" type="text"  name="DeliveryTerm"  placeholder="Delivery Term ..." required>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="DeliveryTime" translate>Delivery Time</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="DeliveryTime" id="DeliveryTime" type="date"  name="DeliveryTime"  placeholder="Delivery Time ..." required>
+                    </div>
+                </div>                
+                
+                <div class="form-group col-md-6">
+                    <label class="control-label col-md-4 normal" for="DeliveryLocation" translate>Delivery Location</label>
+                    <div class="col-md-6">
+                            <input class="form-control" formControlName="DeliveryLocation" id="DeliveryLocation" type="text"  name="DeliveryTime"  placeholder="Delivery Time ..." required>
+                        </div>
+                </div>
+            </div>
+            <div class="row margin-top-15">
+                <div class="col-md-12">
+                    <p-tabView>
+                        <p-tabPanel header="{{'PO Items'|translate}}">
+                            <div class="col-md-10 offset-md-1">
+                                <p-table [value]="PIOItemArr" [responsive]="true">
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th translate>Item Desc</th>
+                                            <th translate>Quentity</th>
+                                            <th translate>Unit Price</th>
+                                            <th translate>Total Amount</th>
+                                            <th translate>Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
+                                        <tr>
+                                            <td>
+                                                {{rowData.DescPoitemName}}
+                                            </td>
+                                            <td>
+                                                {{rowData.Qty}}
+                                            </td>
+                                            <td>
+                                                {{rowData.UnitPrice}}
+                                            </td>
+                                            <td>                                           
+                                                {{rowData.TotalAmount}}
+                                            </td>
+                                            <td>
+                                                <button type="button" (click)="DeletePOitem(i)" class="btn btn-danger">Delete</button> 
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="footer" let-columns="columns">
+                                    <tr>        
+                                        <td>   
+                                            <div>
+                                                <select class="form-control" [(ngModel)]="newPoi.Podescid" [ngModelOptions]="{standalone: true}" required>
+                                                    <option value="null">select Item Description</option>
+                                                    <option  *ngFor="let itemDESC of PIOItemsdesc"  [value]="itemDESC.id">
+                                                        {{itemDESC.descriptions}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </td>
+    
+                                        <td>
+                                            <input class="form-control" [(ngModel)]="newPoi.Qty" placeholder="{{'Quantity'|translate}}.." [ngModelOptions]="{standalone: true}" required>
+                                        </td>
+    
+                                        <td>
+                                            <input class="form-control" [(ngModel)]="newPoi.UnitPrice" placeholder="{{'Unit Price'|translate}}.." [ngModelOptions]="{standalone: true}" required>
+                                        </td> 
+    
+                                        <td> 
+                                            <input class="form-control" [(ngModel)]="newPoi.Qty * newPoi.UnitPrice" type="number" readonly="true" [ngModelOptions]="{standalone: true}" placeholder="0">
+                                        </td> 
+    
+                                        <td> 
+                                            <button type="button" class="btn btn-success" (click)="AddingPOitem()">ADD</button>
+                                        </td>  
+                                    </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="{{'PO Contacts'|translate}}">
+                            <div class="col-md-10 offset-md-1">
+                                <p-table [value]="PoContacts" [responsive]="true">
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th translate>Name</th>
+                                            <th translate>Email</th>
+                                            <th translate>Mobile</th>
+                                            <th translate>Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
+                                        <tr>
+                                            <td>
+                                                {{rowData.Name}}
+                                            </td>
+                                            <td>
+                                                {{rowData.Email}}
+                                            </td>
+                                            <td>
+                                                {{rowData.Mobile}}
+                                            <td>
+                                                <button type="button" (click)="DeletePOcontact(i)" class="btn btn-danger">Delete</button> 
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="footer" let-columns="columns">
+                                    <tr>     
+                                        <td>
+                                            <input class="form-control" [(ngModel)]="newcontact.Name" type="text" placeholder="{{'Name'|translate}}.." [ngModelOptions]="{standalone: true}" required>
+                                        </td>
+    
+                                        <td>
+                                            <input class="form-control" [(ngModel)]="newcontact.Email" type="email" placeholder="{{'Email'|translate}}.." [ngModelOptions]="{standalone: true}" required>
+                                        </td> 
+    
+                                        <td> 
+                                            <input class="form-control" [(ngModel)]="newcontact.Mobile" type="number" [ngModelOptions]="{standalone: true}" placeholder="Mobile">
+                                        </td> 
+    
+                                        <td> 
+                                            <button type="button" class="btn btn-success" (click)="AddPOContact()">ADD</button>
+                                        </td>  
+                                    </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="{{'Payment Terms'|translate}}">
+                            <div class="col-md-10 offset-md-1">
+                                <p-table [value]="Popaymentterms" [responsive]="true">
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th translate>Serail Number</th>
+                                            <th translate>Name</th>
+                                            <th translate>Percentage</th>
+                                            <th translate>Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
+                                        <tr>
+                                            <td>
+                                                {{rowData.SerailNumber}}
+                                            </td>
+                                            <td>
+                                                {{rowData.Name}}
+                                            </td>
+                                            <td>
+                                                {{rowData.Percentage}}
+                                            <td>
+                                                <button type="button" (click)="DeletePOpaymentterm(i)" class="btn btn-danger">Delete</button> 
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="footer" let-columns="columns">
+                                    <tr>     
+                                        <td>
+                                            <input class="form-control" [(ngModel)]="newpayment.SerailNumber" type="text" placeholder="{{'Serail Number'|translate}}.." [ngModelOptions]="{standalone: true}" required>
+                                        </td>
+    
+                                        <td>
+                                            <input class="form-control" [(ngModel)]="newpayment.Name" type="text" placeholder="{{'Name'|translate}}.." [ngModelOptions]="{standalone: true}" required>
+                                        </td> 
+    
+                                        <td> 
+                                            <input class="form-control" [(ngModel)]="newpayment.Percentage" type="number" [ngModelOptions]="{standalone: true}" placeholder="{{'Percentage'|translate}}..">
+                                        </td> 
+    
+                                        <td> 
+                                            <button type="button" class="btn btn-success" (click)="AddPoPaymentTerm()">ADD</button>
+                                        </td>  
+                                    </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </p-tabPanel>
+                    </p-tabView>
+                </div>
+            </div>
+            <div class="row margin-top-15">
+                <div class="col-md-12 text-right">
+                    <button class="center btn btn-primary" translate>Save PO Customer</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="center btn btn-primary" translate routerLink="/listPOsComponent" routerLinkActive="active">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </p-fieldset>
+</div>

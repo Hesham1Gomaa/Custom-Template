@@ -1,0 +1,162 @@
+  <!-- {{editForm.value|json}}   -->
+<div class="container">
+        <p-fieldset legend="Edit Days Registration">
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <form [formGroup]="editForm" (ngSubmit)="Update_Days()" #formDir="ngForm">
+
+                                <div class="row col-md-6">
+                
+                                    <div class="col-md-4">
+                                        <label for="empId">Employee Name</label>
+                                    </div>
+                
+                                    <div class="col-md-6">
+                                        <select class="form-control"  (change)="selectEmp($event.target.value)"  formControlName="empId" id="departmentId" required>
+                                            <option *ngFor="let emp of emps" [value]="emp.id" ><span>{{emp.empName}}</span></option>
+                                        </select>
+                                    </div>
+                
+                                </div>
+                
+                                <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <label for="empName">Customer Name</label>
+                                    </div>
+                
+                                    <div class="col-6">
+                                        <span>{{customer}}</span>
+                                    </div>
+                                </div>
+                
+                                <div class="row col-md-6">
+                
+                                    <div class="col-md-4">
+                                        <label for="hiringDate">HTL</label>
+                                    </div>
+                
+                                    <div class="col-md-6">
+                                        <span>{{Manger}}</span>
+                                    </div>
+                
+                                </div>
+                
+                                <div class=" row col-md-6">
+                
+                                    <div class="col-md-4">
+                                        <label for="email">TL</label>
+                                    </div>
+                
+                                    <div class="col-md-6">
+                                        <span>{{TL}}</span>
+                                    </div>
+                
+                                </div>
+                
+                
+                                <div class="col-md-6">
+                
+                                    <div class="col-md-4">
+                                        <label for="month">From</label>
+                                    </div>
+                
+                                    <div class="col-md-6">
+                                        <!-- <select class="form-control" formControlName="month" id="month" required>
+                                            <option  value="0">select Month</option>
+                                            <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                                        </select> -->
+                                        <input class="form-control" formControlName="from" id="empDays" type="date" name="empDays" placeholder="from.." required>
+
+                                    </div>
+                
+                                </div>
+                                
+                                <div class="col-md-6">
+                
+                                        <div class="col-md-4">
+                                            <label for="month">To</label>
+                                        </div>
+                    
+                                        <div class="col-md-6">
+                                            <!-- <select class="form-control" formControlName="month" id="month" required>
+                                                <option  value="0">select Month</option>
+                                                <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                                            </select> -->
+                                            <input class="form-control" formControlName="to" id="empDays" type="date" name="empDays" placeholder="from.." required>
+    
+                                        </div>
+                    
+                                    </div>
+                
+                                <div class="col-md-6">
+                
+                                    <div class="col-md-4">
+                                        <label for="empDays">EMP Days</label>
+                                    </div>
+                
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="empDays" id="empDays" type="number" name="empDays" placeholder="Employee Days.." required>
+                                    </div>
+                
+                                </div>
+                
+                                <div class="col-md-6">
+                
+                                    <div class="col-md-4">
+                                        <label for="approvedDays">Approved Days</label>
+                                    </div>
+                
+                                    <div class="col-md-6">
+                                        <input class="form-control" formControlName="approvedDays" id="approvedDays" type="number" name="approvedDays" placeholder="approved Days.." required>
+                                    </div>
+                
+                                </div>
+                
+                
+                                <div class="col-md-6">
+                
+                                        <div class="col-md-4">
+                                            <label for="overTimeDays"> Overtime Days</label>
+                                        </div>
+                    
+                                        <div class="col-md-6">
+                                            <input class="form-control" formControlName="overTimeDays"  type="number" placeholder="Over Time Days.." required>
+                                        </div>
+                    
+                                </div>
+                
+                                <div class="col-md-6">
+                
+                                        <div class="col-md-4">
+                                            <label for="approvedOverTimeDays">Approved Overtime Days</label>
+                                        </div>
+                    
+                                        <div class="col-md-6">
+                                            <input class="form-control" formControlName="approvedOverTimeDays" type="number"  placeholder="Approved Over Days.." required>
+                                        </div>
+                    
+                                    </div>
+                
+                                <div class="col-md-6">
+                
+                                    <div class="col-md-4">
+                                        <label for="approvedDays"></label>
+                                    </div>
+                
+                                    <div class="col-md-6">
+                                        <!-- <input class="form-control" formControlName="approvedDays" id="approvedDays" type="number" name="approvedDays" placeholder="approved Days.." required> -->
+                                    </div>
+                
+                                </div>
+                
+                
+                                <div class="col-md-12 text-right">
+                                <button class="center btn btn-primary">Update Days Registration</button>
+                
+                                </div>               
+                
+                        </form>
+                    </div>
+                </div>
+        </p-fieldset>
+</div>

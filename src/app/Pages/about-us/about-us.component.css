@@ -1,0 +1,27 @@
+/*About Section */
+.container{
+    margin-bottom: 2rem;
+}
+.mission{
+    text-align: center;
+    font-size: 36px;
+    line-height: 1.25;
+}
+
+.misstext{
+    text-align: center;
+    font-size: 18px;
+}
+
+.abou{
+    text-align: center;
+    font-size: 32px;    
+}
+.about{
+    text-align: center;
+}
+
+/*Our Team SEction*/
+.team{
+    text-align: center;
+}

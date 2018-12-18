@@ -1,0 +1,172 @@
+
+ <!-- {{addInvoiceForm.value|json}}    -->
+ <div class="container">
+        <p-fieldset legend="Create Invoice">
+            <div class="row">
+                <div class="col-md-12">
+                    <form [formGroup]="addInvoiceForm" (ngSubmit)="addInvoice()" #formDir="ngForm">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-md-12 normal" for="poId">PO Customer No.</label>
+                                <div class="col-md-6">
+                                    <select class="form-control"  (change)="selectPO($event.target.value)"  formControlName="poid"  required>
+                                        <option *ngFor="let po of AllPOs" [value]="po.id" ><span>{{po.ponoCreation}}</span></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                    <label class="control-label col-md-6 normal" for="cusName">Customer Name</label>
+                                    <div class="col-md-6">
+                                           <!-- <span>{{customer}}</span> -->
+                                   <input value="{{customer}}" class="form-control"  readonly="true">
+                                    </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                    <label class="control-label col-md-4 normal" for="poId">Invoice No.</label>
+                                    <div class="col-md-6">
+                                            <input class="form-control" formControlName="invoiceNo" type="text"  
+                                            placeholder="Invoice No" required>
+                                    </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                    <label class="control-label col-md-4 normal" >Invoice Date.</label>
+                                    <div class="col-md-6">
+                                            <input class="form-control" formControlName="invoiceDate" type="date"  
+                                   placeholder="Invoice Date" required>
+                                    </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div *ngIf="selctionPO" class="table table-striped">
+                                    <div class="row margin-top-15">
+                                        <p-fieldset legend="Calculate Invoice">
+                                            <div class="col-md-12">
+                                                <div class="title-panel-header">Po Items</div>
+                                                <div class="margin-top-15">
+                                                    <table class="table" id="myTable">
+                                                            <thead>
+                                                                    <tr>
+                                                                        <th>Item Description</th>
+                                                                        <th>Qty</th>
+                                                                        <th>Unit Price</th>
+                                                                        <th>Total Amount</th>
+                                                                        <th>Consumed Qty</th>
+
+                                                                     
+                                                                    </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let podesc of poitemsDesc; let i = index">
+                                                                    <td>   
+                                                                    <span>{{podesc.descriptions}}</span>
+                                                                    </td>
+                                                                    <td>
+                                                                    <span>{{podesc.qty}}</span>
+                                                                    </td>
+                                                                    <td>
+                                                                    <span>{{podesc.unitPrice}}</span>
+                                                                    </td>
+                                                                    <td>
+                                                                    <span>{{podesc.totalAmount}}</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span>{{podesc.invoicedQT}}</span>
+                                                                    </td>
+                                                                    
+                                                                </tr>
+                                                            </tbody>
+                                                            </table>
+                                                        </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                    <div class="title-panel-header">Po Employees</div>
+                                                    <div class="margin-top-15">
+                                                            <table class="table" id="myTable">
+                                                                    <thead>
+                                                                            <tr>
+                                                                                <th>Employee Name</th>
+                                                                                <th>Description</th>
+                                                                                <th>Price</th>
+                                                                                <th>Invoiced Days</th>
+                                                                                <th>Remaining Days</th>
+
+
+                                                                            </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr *ngFor="let assignedEmp of AssignedEmpToPO; let i = index">
+                                                                            <td>   
+                                                                               <span>{{assignedEmp.empName}}</span>
+                                                                            </td>
+                                                                            <td>
+                                                                              <span>{{assignedEmp.descriptions}}</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                <span>{{assignedEmp.unitPrice}} </span>
+                                                                            </td>
+                                                                            <td>
+                                                                                    <span>{{assignedEmp.invoicedDayes}} </span>
+
+                                                                            </td>
+                                                                            <td>
+                                                                                    <span>{{assignedEmp.approvedDayes.remaingingDayes}} </span>
+
+                                                                            </td>
+                                                                            
+                                                                            
+                                                                        </tr>
+                                                                    </tbody>
+                                                            </table> 
+                                                    </div>
+                                            </div>
+                                            <div class="col-md-12 text-right">
+                                                    <button type="button" (click)="calculatePO()" class="center btn btn-info">Calculate</button>
+                                            </div>                                            
+
+                                        </p-fieldset>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div *ngIf="calculationFlag" class="table table-striped">
+                                <h5 style="color:rgb(139, 139, 23)">Calculations</h5>
+                                <table class="table" id="myTable">
+                                    <thead>
+                                            <tr>
+                                                <th>Item Description</th>
+                                                <th>Actual Amount</th>
+                                                <th>Reminded amount</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let calObject of calcArr; let i = index">
+                                            <td>   
+                                                <span>{{calObject.desc}}</span>
+                                            </td>
+                                            
+                                            <td>
+                                                <span>{{calObject.actualAmount}}</span>
+                                            </td>
+                                            
+                                            <td>
+                                                <span>{{calObject.RemindAmount}} </span>
+                                            </td>
+                                            <td>
+                                                <span>{{calObject.Amount}} </span>
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                            </div>
+                            <div class="col-md-12 text-right">
+                            <button *ngIf="calculationFlag" class="center btn btn-primary">Add Invoice</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+      </p-fieldset>
+    </div>
+    
