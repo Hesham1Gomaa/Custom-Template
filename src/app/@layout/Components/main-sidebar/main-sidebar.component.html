@@ -75,7 +75,7 @@
               *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a class="nav-item nav-link" routerLink="/DashBoard"> <span class="iconhome">{{'NTG Clarity Outsourcing'|translate}}</span></a>
+       <a class="nav-item nav-link" routerLink="/DashBoard"> <span class="iconhome">Spark <span style="color:red" class="fa fa-bolt"> </span> Application </span></a>
       <span class="spacer"></span>
       <mat-list-item>
         <a *ngIf="browserLang=='en'" class="lang-option flag-icon flag-icon-eg" style="color:white; font-size: 18px" (click)="changeLang('ar')"><span style="margin-left:66px">{{ browserLang=="en" ?'AR':'EN'}}</span></a>
