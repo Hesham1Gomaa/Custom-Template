@@ -49,8 +49,10 @@ export class SttingContactRoleComponent implements OnInit {
 
   }
   addContactRole() {
+    this.submitted = false;
       this.editMode = false;
-    this.isAddEditForm = true;
+    this.isAddEditForm = !this.isAddEditForm;
+
     this.addContactRoleForm.reset();
   }
 

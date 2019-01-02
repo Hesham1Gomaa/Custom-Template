@@ -6,7 +6,7 @@
         <form  [formGroup]="addCustomerContactForm" (ngSubmit)="AddcustmerContact()" #formDir="ngForm">
             <div class="row col-md-12">
                 <div class="form-group row col-md-6">
-                    <label class=" control-label col-md-12 normal" translate>Contact Name <span class="required">*</span></label>
+                  <label class=" control-label col-md-12 normal" >{{'Contact Name'|translate}}<span class="required">*</span></label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" formControlName="ContactName" placeholder="{{'Contact Name'|translate}}.." [ngClass]="{ 'is-invalid': submitted && f.ContactName.errors }"/>
                         <div *ngIf="submitted && f.ContactName.errors" class="invalid-feedback">
@@ -16,10 +16,10 @@
                 </div>
 
                 <div class="form-group row col-md-6">
-                    <label class=" control-label col-md-12 normal" translate>Role <span class="required">*</span></label>
+                    <label class=" control-label col-md-12 normal">{{'Role'|translate}} <span class="required">*</span></label>
                     <div class="col-md-6">
                         <select class="form-control" formControlName="ContactRoleId"  [ngClass]="{ 'is-invalid': submitted && f.ContactRoleId.errors }">                   
-                                <option [value]="null">select customer Role</option>
+                                <option [value]="null" >{{'select customer Role'|translate}}</option>
                             <option *ngFor="let role of custRoles" [value]="role.id">{{role.customerRole}}</option>
                             </select>
                         <div *ngIf="submitted && f.ContactRoleId.errors" class="invalid-feedback">
@@ -29,10 +29,10 @@
                 </div>
 
                 <div class="form-group row col-md-6">
-                        <label class=" control-label col-md-12 normal" translate>Customer Name <span class="required">*</span></label>
+                        <label class=" control-label col-md-12 normal" translate>{{'Customer Name'|translate}} <span class="required">*</span></label>
                         <div class="col-md-6">
                             <select class="form-control" formControlName="CustomerId"  [ngClass]="{ 'is-invalid': submitted && f.CustomerId.errors }">
-                                <option [value]="null">select customer Name</option>
+                              <option [value]="null">{{'select Customer Name'|translate}} </option>
                                 <option *ngFor="let cust of customers" [value]="cust.id">{{cust.customerName}}</option>
                             </select>
                             <div *ngIf="submitted && f.CustomerId.errors" class="invalid-feedback">
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="form-group row col-md-6">
-                        <label class=" control-label col-md-12 normal" translate>Mobile <span class="required">*</span></label>
+                  <label class=" control-label col-md-12 normal">{{'Mobile'|translate}} <span class="required">*</span></label>
                         <div class="col-md-6">
                             <input type="number" class="form-control" formControlName="ContactMobile" placeholder="{{'Mobile'|translate}}.." [ngClass]="{ 'is-invalid': submitted && f.ContactMobile.errors }"/>
                             <div *ngIf="submitted && f.ContactMobile.errors" class="invalid-feedback">

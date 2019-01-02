@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {Router,ActivatedRoute} from "@angular/router";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -11,14 +11,17 @@ import {Router,ActivatedRoute} from "@angular/router";
 })
 export class PagesComponent implements OnInit  {
 
-  constructor(private spinner: NgxSpinnerService,private router: Router,) {}
+  constructor(private spinner: NgxSpinnerService,private router:Router) {}
 
   ngOnInit() {
-  
-      this.router.navigate(['DashBoard']);
+    //this.spinner.show();
+ 
+    // setTimeout(() => {
+    //     /** spinner ends after 5 seconds */
+    //     this.spinner.hide();
+    // }, 5000);
+	 this.router.navigate(['DashBoard']);
 
-
-  
   }
 
   

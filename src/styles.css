@@ -1,1 +1,170 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif;}
+
+button, html [type="button"], [type="reset"], [type="submit"] {
+    outline: none!important;
+}
+.mat-toolbar{
+    height: 50px!important;
+}
+.mat-toolbar.mat-primary{
+    background: #32324c!important;
+    background: -webkit-linear-gradient(to right, #32324c, #155d7d)!important;
+    background: linear-gradient(to right, #32324c, #155d7d)!important;
+}
+
+.sidenav{
+    top:50px!important;
+}
+.lang-option{
+    font-size: 14px!important
+}
+
+.margin-top-15{
+  margin-top: 15px!important;   
+}
+.empty-data{
+    width:100%;
+    padding: 10px; 
+    color: red;
+}
+
+ p-fieldset {
+    width: 100%;
+}
+
+legend {
+    display: block;
+    width: auto !important;
+    margin-bottom: .5rem;
+    font-size: 16px !important;
+    line-height: inherit;
+    color: #666c71 !important;
+    white-space: normal;
+    font-weight: bold;
+}
+
+.ui-widget {
+    /*font-family: "Roboto", sans-serif !important;*/
+    font-size: 14px !important;
+}
+
+.required{
+    color:red;
+    padding-left: 2px;
+}
+
+.msgError{
+    color: red;
+}
+
+.container{
+    width:100%;
+    margin-bottom: 15px;
+}
+
+.title-panel-header{
+    width: 100%;
+    font-size: 15px;
+    border-bottom: 2px solid #dfdfdf;
+    font-weight: bold;
+    padding-bottom: 2px;
+    margin: 0 0 0 5px;    
+    color: #4a4a4a;
+}
+
+.widget {
+    border: 1px solid #F5F1F1;
+    padding: 0px;
+    -webkit-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px -2px rgba(0,0,0,0.75);
+}
+.icon-rounded {
+    color: #ffffff;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -o-border-radius: 50px;
+    -ms-border-radius: 50px;
+    font-size: 25px;
+}
+.r3_counter_box {
+    padding: 20px 20px;
+    min-height: 100px;
+    background: #ffffff;
+}
+.fa.pull-left {
+    margin-right: 5% !important;
+}
+.r3_counter_box .fa {
+    margin-right: 0px;
+    font-size: 25px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5 sall;
+    transition: 0.5s all;
+}
+.stats {
+    color: #3e5e90f5!important;
+}
+.mediumpurple{
+    background-color: mediumpurple;
+}
+.yellow {
+    background: #ffb22b;
+}
+.blue {
+    background: #1e88e5;
+}
+.green{
+    background: #00ad45;
+}
+
+.mat-icon-button {
+    width: 30px!important;
+    height: 30px!important;
+    line-height: 30px!important;
+    margin-right: 2px!important;
+}
+.mat-paginator-icon {
+    width: 20px!important;
+}
+
+.table {
+    border: 1px solid #dfdfdf;
+}
+
+tr.mat-header-row {    
+    background: #848484;
+    background: -moz-linear-gradient(top, #848484 0%, #4c5152 100%);
+    background: -webkit-linear-gradient(top, #848484 0%,#4c5152 100%);
+    background: linear-gradient(to bottom, #848484 0%,#4c5152 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#848484', endColorstr='#4c5152',GradientType=0 );
+    color: #f9f9f9;
+    height: 46px!important;
+}
+
+.table th, .table td, .table thead th {
+    padding: 0rem;
+    vertical-align: middle;
+    
+}
+.registerGrowl.ui-growl {
+    /* position: relative;
+    width: 50%;
+    top: 0;
+    right: 0; */
+    left: 50%;
+   right: 0;
+   margin-left:-150px;
+}

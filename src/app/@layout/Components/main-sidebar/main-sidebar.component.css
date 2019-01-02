@@ -1,3 +1,5 @@
+$sidenav-background-color: #32324c;
+
 .sidenav-container {
   height: 100%;
   top: 50px!important;
@@ -14,18 +16,27 @@
   position: fixed;
   top: 64px;
   min-width: 220px;
-  font-size: 14px!important;
+  font-size: 13px!important;
   background-color: #fafafa;
   box-shadow: 6px 0 6px rgba(231, 4, 4, 0.1);
 
 }
 
 mat-nav-list a{
-color:wheat;
-}
+  color:rgb(220, 220, 220);
+  }
 
+  mat-nav-list a:hover{
+    color:rgb(220, 220, 220);
+    border-left: 2px solid #165d7d!important;
+    background: darken($sidenav-background-color,5%);
+    
+  }
+      
 .mat-sidenav{
-  background-color: #4f575afd;
+    background: #32324c!important;
+    background: -webkit-linear-gradient(to top, #32324c, #155d7d)!important;
+    background: linear-gradient(to bottom, #32324c, #155d7d)!important;
 }
 
 .spacer{
@@ -35,12 +46,6 @@ color:wheat;
 mat-sidenav-content{
    position: sticky;
   right: 250px;  
-}
-.mat-toolbar.mat-primary {
-  /* position: none;
-  top: 0; */
-  background:#343a40 !important;
-
 }
 
 .iconhome{
@@ -57,8 +62,6 @@ mat-toolbar.mat-toolbar {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
 }
 
-
-
 mat-toolbar a{
   display: inline;
   color: white;
@@ -66,6 +69,10 @@ mat-toolbar a{
   }
 mat-toolbar a:hover {
   color: none;
+}
+mat-nav-list a:hover{
+  background-color: steelblue;
+  ;
 }
 .lang-title {
   color: #FFF;
@@ -77,4 +84,6 @@ mat-toolbar a:hover {
   margin-right: 15px;
   font-size: 16px;
 }
-
+.menu-icon{
+  margin-right: 3px;
+}

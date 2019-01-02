@@ -3,7 +3,7 @@ import {EmployeeService} from '../pages.services/employee.service/employee.servi
 import { employee } from '../pages.services/employee.service/employee';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import { Message, ConfirmationService } from 'primeng/components/common/api';
+import { Message } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-employee',

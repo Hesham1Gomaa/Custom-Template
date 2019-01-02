@@ -25,9 +25,8 @@ import { empDpPipe } from '../pipes/empPipe/emp-dept-pipe';
 
 
 // import {MatPaginatorModule} from '@angular/material/paginator';
-import { MatTableModule, MatFormFieldModule, MatPaginatorModule, MatExpansionModule, MatDialogModule,MatTabsModule, MatButtonModule, MatIconModule,MatCheckboxModule, MatSlideToggleModule} from '@angular/material';
+import { MatTableModule, MatFormFieldModule, MatPaginatorModule, MatExpansionModule, MatDialogModule,MatTabsModule, MatCardModule,MatButtonModule, MatIconModule,MatCheckboxModule, MatSlideToggleModule} from '@angular/material';
 import { NgxSpinnerModule } from 'ngx-spinner';
- 
 
 import { PanelModule,ButtonModule,AccordionModule,RadioButtonModule} from 'primeng/primeng';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -54,6 +53,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ListEnvoicesComponent } from './Invoices/list-envoices/list-envoices.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CheckboxModule } from 'primeng/checkbox';
+//AmChart
+import { AmChartsModule } from "@amcharts/amcharts3-angular";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -75,6 +77,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     MatButtonModule,
     MatDialogModule,
     MatTabsModule,
+    MatCardModule,
     MatCheckboxModule,
     NgxSpinnerModule,
     MatExpansionModule,
@@ -86,7 +89,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     MatSlideToggleModule,
     ToggleButtonModule,
     CheckboxModule,
-    FileUploadModule
+    FileUploadModule,
+    AmChartsModule
     ],
   declarations: [
     PagesComponent,

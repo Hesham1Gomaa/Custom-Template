@@ -18,5 +18,13 @@ export class SettingCustomerEmployeeService {
 
     return this.http.post<any>(this.baseUrl+'addCustEmp',custEmpObj);
   };
+  allCustContact(): Observable<any> {
 
+    return this.http.get<any>(this.baseUrl + 'AllCustContact');
+  }
+  DeleteCustomerEmployee(custEmpObj: any): Observable<any> {
+
+    return this.http.post<any>(this.baseUrl + 'DeleteCustomerEmployee', custEmpObj);
+
+  }
 }

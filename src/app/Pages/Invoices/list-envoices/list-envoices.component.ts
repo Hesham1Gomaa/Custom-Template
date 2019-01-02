@@ -97,7 +97,8 @@ export class ListEnvoicesComponent implements OnInit {
   Cancel(){
     this.checkEdit = false;
 
-  };
+  }
+  
   changeInvoiceStatus(){
     this.submitted = true;
 
@@ -110,7 +111,7 @@ export class ListEnvoicesComponent implements OnInit {
           detail: 'Please Enter Role Name <br/>'
         });
            return;
-      }
+      };
 
       this.InvoiceService.updtaeInvoiceStatus(this.paymentForm.value).subscribe(data => {
         debugger;
@@ -136,6 +137,6 @@ export class ListEnvoicesComponent implements OnInit {
          });
         }
       });
-  }
-  
+  };
+
 }

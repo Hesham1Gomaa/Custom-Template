@@ -1,0 +1,5 @@
+.mat-toolbar.mat-primary {
+    background: #32324c!important;
+    background: -webkit-linear-gradient(to right, #32324c, #155d7d)!important;
+    background: linear-gradient(to right, #32324c, #155d7d)!important;
+}
